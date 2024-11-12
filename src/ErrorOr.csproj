@@ -20,6 +20,9 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="System.Collections.ObjectModel" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="../assets/icon-square.png" Pack="true" Visible="false" PackagePath="" />
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Stylecop.json" />
