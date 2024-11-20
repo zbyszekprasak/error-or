@@ -27,11 +27,6 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
 
     private ErrorOr(List<Error> errors)
     {
-        if (errors is null)
-        {
-            throw new ArgumentNullException(nameof(errors));
-        }
-
         if (errors.Count == 0)
         {
             throw new ArgumentException("Cannot create an ErrorOr<TValue> from an empty collection of errors. Provide at least one error.", nameof(errors));
