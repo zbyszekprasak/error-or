@@ -13,6 +13,7 @@ public readonly record struct Error
         Code = code;
         Description = description;
         Type = type;
+        NumericType = (int)type;
         if (metadata is not null)
         {
             _innerMetadata = new InnerMetadata(metadata);
@@ -38,7 +39,7 @@ public readonly record struct Error
     /// <summary>
     /// Gets the numeric value of the type.
     /// </summary>
-    public int NumericType => (int)Type;
+    public int NumericType { get; }
 
     /// <summary>
     /// Gets the metadata.
