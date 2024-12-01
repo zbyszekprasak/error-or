@@ -20,26 +20,6 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
         throw new InvalidOperationException("Default construction of ErrorOr<TValue> is invalid. Please use provided factory methods to instantiate.");
     }
 
-    private ErrorOr(Error error)
-    {
-        _errors = [error];
-    }
-
-    private ErrorOr(List<Error> errors)
-    {
-        if (errors is null)
-        {
-            throw new ArgumentNullException(nameof(errors));
-        }
-
-        if (errors is null || errors.Count == 0)
-        {
-            throw new ArgumentException("Cannot create an ErrorOr<TValue> from an empty collection of errors. Provide at least one error.", nameof(errors));
-        }
-
-        _errors = errors;
-    }
-
     private ErrorOr(TValue value)
     {
         if (value is null)
@@ -48,6 +28,21 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
         }
 
         _value = value;
+    }
+
+    private ErrorOr(Error error)
+    {
+        _errors = [error];
+    }
+
+    private ErrorOr(List<Error> errors)
+    {
+        if (errors.Count == 0)
+        {
+            throw new ArgumentException("Cannot create an ErrorOr<TValue> from an empty collection of errors. Provide at least one error.", nameof(errors));
+        }
+
+        _errors = errors;
     }
 
     /// <summary>
