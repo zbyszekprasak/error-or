@@ -28,6 +28,37 @@ All notable changes to this project are documented in this file.
 
 - [#104](https://github.com/amantinband/error-or/pull/104) Support for .NET 8 was added
 
+- [#109](https://github.com/amantinband/error-or/issues/109), [#111](https://github.com/amantinband/error-or/pull/111) Added `FailIf` method overloads that allow to use value in error definition using `Func<TValue, Error>` error builder
+
+    ```cs
+    public ErrorOr<TValue> FailIf(Func<TValue, bool> onValue, Func<TValue, Error> errorBuilder)
+    ```
+
+    ```cs
+    public async Task<ErrorOr<TValue>> FailIfAsync(Func<TValue, Task<bool>> onValue, Func<TValue, Task<Error>> errorBuilder)
+    ```
+
+    ```cs
+    public static async Task<ErrorOr<TValue>> FailIf<TValue>(
+        this Task<ErrorOr<TValue>> errorOr,
+        Func<TValue, bool> onValue,
+        Func<TValue, Error> errorBuilder)
+    ```
+
+    ```cs
+    public static async Task<ErrorOr<TValue>> FailIfAsync<TValue>(
+        this Task<ErrorOr<TValue>> errorOr,
+        Func<TValue, Task<bool>> onValue,
+        Func<TValue, Task<Error>> errorBuilder)
+    ```
+
+    Value can now be used to build the error:
+
+    ```cs
+    ErrorOr<int> result = errorOrInt
+        .FailIf(num => num > 3, (num) => Error.Failure(description: $"{num} is greater than 3"));
+    ```
+
 ## [2.0.1] - 2024-03-26
 
 ### Breaking Changes
