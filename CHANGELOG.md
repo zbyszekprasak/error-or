@@ -59,6 +59,12 @@ All notable changes to this project are documented in this file.
         .FailIf(num => num > 3, (num) => Error.Failure(description: $"{num} is greater than 3"));
     ```
 
+### Fixed
+
+- [#85](https://github.com/amantinband/error-or/issues/85), [#97](https://github.com/amantinband/error-or/pull/97) `ErrorOr` turned into Value Object by reimplementing `Equals` and `GetHashCode` methods
+
+    New dependency was introduced to [Microsoft.Bcl.HashCode](https://www.nuget.org/packages/Microsoft.Bcl.HashCode) and development dependency was introduced to [Nullable](https://www.nuget.org/packages/Nullable)
+
 ### Optimized
 
 - [#98](https://github.com/amantinband/error-or/issues/98), [#99](https://github.com/amantinband/error-or/pull/99) Memory consumption optimized by moving static empty errors lists from generic struct into non-generic class
