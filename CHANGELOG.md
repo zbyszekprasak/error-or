@@ -6,6 +6,26 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- [#94](https://github.com/amantinband/error-or/issues/94), [#95](https://github.com/amantinband/error-or/pull/95) Added missing async versions of `FailIf` methods
+
+    ```cs
+    public async Task<ErrorOr<TValue>> FailIfAsync(Func<TValue, Task<bool>> onValue, Error error)
+    ```
+
+    ```cs
+    public static async Task<ErrorOr<TValue>> FailIf<TValue>(
+        this Task<ErrorOr<TValue>> errorOr,
+        Func<TValue, bool> onValue,
+        Error error)
+    ```
+
+    ```cs
+    public static async Task<ErrorOr<TValue>> FailIfAsync<TValue>(
+        this Task<ErrorOr<TValue>> errorOr,
+        Func<TValue, Task<bool>> onValue,
+        Error error)
+    ```
+
 - [#104](https://github.com/amantinband/error-or/pull/104) Support for .NET 8 was added
 
 ## [2.0.1] - 2024-03-26
