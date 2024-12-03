@@ -8,7 +8,8 @@
 
   <PropertyGroup>
     <PackageId>ErrorOr</PackageId>
-    <Version>2.0.1</Version>
+    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionSuffix>alpha.0</VersionSuffix>
     <Authors>Amichai Mantinband</Authors>
     <PackageIcon>icon-square.png</PackageIcon>
     <PackageTags>Result,Results,ErrorOr,Error,Handling</PackageTags>

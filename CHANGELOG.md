@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [2.1.0-alpha.0] - to be released
+
+### Added
+
+- [#104](https://github.com/amantinband/error-or/pull/104) Support for .NET 8 was added
+
 ## [2.0.1] - 2024-03-26
 
 ### Breaking Changes
