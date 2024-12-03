@@ -59,6 +59,10 @@ All notable changes to this project are documented in this file.
         .FailIf(num => num > 3, (num) => Error.Failure(description: $"{num} is greater than 3"));
     ```
 
+### Optimized
+
+- [#98](https://github.com/amantinband/error-or/issues/98), [#99](https://github.com/amantinband/error-or/pull/99) Memory consumption optimized by moving static empty errors lists from generic struct into non-generic class
+
 ## [2.0.1] - 2024-03-26
 
 ### Breaking Changes
