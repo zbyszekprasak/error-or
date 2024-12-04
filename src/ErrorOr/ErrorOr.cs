@@ -38,12 +38,12 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
     /// <summary>
     /// Gets the list of errors. If the state is not error, the list will contain a single error representing the state.
     /// </summary>
-    public List<Error> Errors => IsError ? _errors! : KnownErrors.CachedNoErrorsList;
+    public List<Error> Errors => IsError ? _errors : KnownErrors.CachedNoErrorsList;
 
     /// <summary>
     /// Gets the list of errors. If the state is not error, the list will be empty.
     /// </summary>
-    public List<Error> ErrorsOrEmptyList => IsError ? _errors! : KnownErrors.CachedEmptyErrorsList;
+    public List<Error> ErrorsOrEmptyList => IsError ? _errors : KnownErrors.CachedEmptyErrorsList;
 
     /// <summary>
     /// Gets the value.
@@ -62,7 +62,7 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
                 return KnownErrors.NoFirstError;
             }
 
-            return _errors![0];
+            return _errors[0];
         }
     }
 
