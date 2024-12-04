@@ -41,12 +41,12 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
     /// <summary>
     /// Gets the list of errors. If the state is not error, the list will contain a single error representing the state.
     /// </summary>
-    public List<Error> Errors => IsError ? _errors! : throw new InvalidOperationException("The Errors property cannot be accessed when no errors have been recorded. Check IsError before accessing Errors.");
+    public List<Error> Errors => IsError ? _errors! : KnownErrors.CachedNoErrorsList;
 
     /// <summary>
     /// Gets the list of errors. If the state is not error, the list will be empty.
     /// </summary>
-    public List<Error> ErrorsOrEmptyList => IsError ? _errors! : [];
+    public List<Error> ErrorsOrEmptyList => IsError ? _errors! : KnownErrors.CachedEmptyErrorsList;
 
     /// <summary>
     /// Gets the value.
@@ -62,7 +62,7 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
         {
             if (!IsError)
             {
-                throw new InvalidOperationException("The FirstError property cannot be accessed when no errors have been recorded. Check IsError before accessing FirstError.");
+                return KnownErrors.NoFirstError;
             }
 
             return _errors![0];

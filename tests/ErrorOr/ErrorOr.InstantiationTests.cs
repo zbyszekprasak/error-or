@@ -22,17 +22,17 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
-    public void CreateFromFactory_WhenAccessingErrors_ShouldThrow()
+    public void CreateFromFactory_WhenAccessingErrors_ShouldReturnUnexpectedError()
     {
         // Arrange
         IEnumerable<string> value = ["value"];
         ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
 
         // Act
-        Func<List<Error>> errors = () => errorOrPerson.Errors;
+        List<Error> errors = errorOrPerson.Errors;
 
         // Assert
-        errors.Should().ThrowExactly<InvalidOperationException>();
+        errors.Should().ContainSingle().Which.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
@@ -50,17 +50,17 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
-    public void CreateFromFactory_WhenAccessingFirstError_ShouldThrow()
+    public void CreateFromFactory_WhenAccessingFirstError_ShouldReturnUnexpectedError()
     {
         // Arrange
         IEnumerable<string> value = ["value"];
         ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
 
         // Act
-        Func<Error> action = () => errorOrPerson.FirstError;
+        Error firstError = errorOrPerson.FirstError;
 
         // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
+        firstError.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
@@ -78,17 +78,17 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
-    public void CreateFromValue_WhenAccessingErrors_ShouldThrow()
+    public void CreateFromValue_WhenAccessingErrors_ShouldReturnUnexpectedError()
     {
         // Arrange
         IEnumerable<string> value = ["value"];
         ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
 
         // Act
-        Func<List<Error>> action = () => errorOrPerson.Errors;
+        List<Error> errors = errorOrPerson.Errors;
 
         // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
+        errors.Should().ContainSingle().Which.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
@@ -106,17 +106,17 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
-    public void CreateFromValue_WhenAccessingFirstError_ShouldThrow()
+    public void CreateFromValue_WhenAccessingFirstError_ShouldReturnUnexpectedError()
     {
         // Arrange
         IEnumerable<string> value = ["value"];
         ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
 
         // Act
-        Func<Error> action = () => errorOrPerson.FirstError;
+        Error firstError = errorOrPerson.FirstError;
 
         // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
+        firstError.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
@@ -172,27 +172,27 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
-    public void ImplicitCastResult_WhenAccessingErrors_ShouldThrow()
+    public void ImplicitCastResult_WhenAccessingErrors_ShouldReturnUnexpectedError()
     {
         ErrorOr<Person> errorOrPerson = new Person("Amichai");
 
         // Act
-        Func<List<Error>> action = () => errorOrPerson.Errors;
+        List<Error> errors = errorOrPerson.Errors;
 
         // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
+        errors.Should().ContainSingle().Which.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
-    public void ImplicitCastResult_WhenAccessingFirstError_ShouldThrow()
+    public void ImplicitCastResult_WhenAccessingFirstError_ShouldReturnUnexpectedError()
     {
         ErrorOr<Person> errorOrPerson = new Person("Amichai");
 
         // Act
-        Func<Error> action = () => errorOrPerson.FirstError;
+        Error firstError = errorOrPerson.FirstError;
 
         // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
+        firstError.Type.Should().Be(ErrorType.Unexpected);
     }
 
     [Fact]
