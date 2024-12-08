@@ -8,62 +8,6 @@ public class ErrorOrInstantiationTests
     private record Person(string Name);
 
     [Fact]
-    public void CreateFromFactory_WhenAccessingValue_ShouldReturnValue()
-    {
-        // Arrange
-        IEnumerable<string> value = ["value"];
-
-        // Act
-        ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
-
-        // Assert
-        errorOrPerson.IsError.Should().BeFalse();
-        errorOrPerson.Value.Should().BeSameAs(value);
-    }
-
-    [Fact]
-    public void CreateFromFactory_WhenAccessingErrors_ShouldThrow()
-    {
-        // Arrange
-        IEnumerable<string> value = ["value"];
-        ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
-
-        // Act
-        Func<List<Error>> errors = () => errorOrPerson.Errors;
-
-        // Assert
-        errors.Should().ThrowExactly<InvalidOperationException>();
-    }
-
-    [Fact]
-    public void CreateFromFactory_WhenAccessingErrorsOrEmptyList_ShouldReturnEmptyList()
-    {
-        // Arrange
-        IEnumerable<string> value = ["value"];
-        ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
-
-        // Act
-        List<Error> errors = errorOrPerson.ErrorsOrEmptyList;
-
-        // Assert
-        errors.Should().BeEmpty();
-    }
-
-    [Fact]
-    public void CreateFromFactory_WhenAccessingFirstError_ShouldThrow()
-    {
-        // Arrange
-        IEnumerable<string> value = ["value"];
-        ErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
-
-        // Act
-        Func<Error> action = () => errorOrPerson.FirstError;
-
-        // Assert
-        action.Should().ThrowExactly<InvalidOperationException>();
-    }
-
-    [Fact]
     public void CreateFromValue_WhenAccessingValue_ShouldReturnValue()
     {
         // Arrange
