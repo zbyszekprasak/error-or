@@ -64,6 +64,20 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    public void CreateFromErrorList_UsingFactory_WhenAccessingErrors_ShouldReturnErrorList()
+    {
+        // Arrange
+        var error = Error.Validation("User.Name", "Name is too short");
+
+        // Act
+        ErrorOr<Person> errorOrPerson = ErrorOrFactory.From<Person>([error]);
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+        errorOrPerson.Errors.Should().ContainSingle().Which.Should().Be(error);
+    }
+
+    [Fact]
     public void CreateFromErrorList_WhenAccessingErrors_ShouldReturnErrorList()
     {
         // Arrange
@@ -76,6 +90,20 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    public void CreateFromErrorList_UsingFactory_WhenAccessingErrorsOrEmptyList_ShouldReturnErrorList()
+    {
+        // Arrange
+        var error = Error.Validation("User.Name", "Name is too short");
+
+        // Act
+        ErrorOr<Person> errorOrPerson = ErrorOrFactory.From<Person>([error]);
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+        errorOrPerson.ErrorsOrEmptyList.Should().ContainSingle().Which.Should().Be(error);
+    }
+
+    [Fact]
     public void CreateFromErrorList_WhenAccessingErrorsOrEmptyList_ShouldReturnErrorList()
     {
         // Arrange
@@ -85,6 +113,20 @@ public class ErrorOrInstantiationTests
         // Act & Assert
         errorOrPerson.IsError.Should().BeTrue();
         errorOrPerson.ErrorsOrEmptyList.Should().ContainSingle().Which.Should().Be(errors.Single());
+    }
+
+    [Fact]
+    public void CreateFromErrorList_UsingFactory_WhenAccessingValue_ShouldThrowInvalidOperationException()
+    {
+        // Arrange
+        ErrorOr<Person> errorOrPerson = ErrorOrFactory.From<Person>([Error.Validation("User.Name", "Name is too short")]);
+
+        // Act
+        var act = () => errorOrPerson.Value;
+
+        // Assert
+        act.Should().Throw<InvalidOperationException>()
+           .And.Message.Should().Be("The Value property cannot be accessed when errors have been recorded. Check IsError before accessing Value.");
     }
 
     [Fact]

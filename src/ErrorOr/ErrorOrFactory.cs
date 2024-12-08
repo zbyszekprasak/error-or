@@ -15,4 +15,15 @@ public static class ErrorOrFactory
     {
         return value;
     }
+
+    /// <summary>
+    /// Creates an <see cref="ErrorOr{TValue}"/> from a list of errors.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <param name="errors">List of errors.</param>
+    /// <returns>An instance of <see cref="ErrorOr{TValue}"/> containing provided list of errors.</returns>
+    public static ErrorOr<TValue> From<TValue>(List<Error> errors)
+    {
+        return errors;
+    }
 }
