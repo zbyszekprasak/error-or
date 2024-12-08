@@ -107,6 +107,7 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
     /// <summary>
     /// Creates an <see cref="ErrorOr{TValue}"/> from a list of errors.
     /// </summary>
+    [Obsolete("ErrorOrFactory.From<TValue>(errors) should be used instead.")]
     public static ErrorOr<TValue> From(List<Error> errors)
     {
         return errors;

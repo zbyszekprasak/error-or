@@ -78,6 +78,7 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    [Obsolete]
     public void CreateFromErrorList_WhenAccessingErrors_ShouldReturnErrorList()
     {
         // Arrange
@@ -104,6 +105,7 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    [Obsolete]
     public void CreateFromErrorList_WhenAccessingErrorsOrEmptyList_ShouldReturnErrorList()
     {
         // Arrange
@@ -130,6 +132,7 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    [Obsolete]
     public void CreateFromErrorList_WhenAccessingValue_ShouldThrowInvalidOperationException()
     {
         // Arrange
