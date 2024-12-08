@@ -17,6 +17,17 @@ public static class ErrorOrFactory
     }
 
     /// <summary>
+    /// Creates a new instance of <see cref="ErrorOr{TValue}"/> from single error.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <param name="error">Single error instance to wrap.</param>
+    /// <returns>An instance of <see cref="ErrorOr{TValue}"/> containing the provided error.</returns>
+    public static ErrorOr<TValue> From<TValue>(Error error)
+    {
+        return error;
+    }
+
+    /// <summary>
     /// Creates an <see cref="ErrorOr{TValue}"/> from a list of errors.
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>

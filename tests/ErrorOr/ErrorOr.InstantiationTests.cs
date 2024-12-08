@@ -149,6 +149,16 @@ public class ErrorOrInstantiationTests
     }
 
     [Fact]
+    public void CreateFromSingleError_UsingFactory_ShouldBeError()
+    {
+        // Act
+        ErrorOr<Person> errorOrPerson = ErrorOrFactory.From<Person>(Error.Validation("User.Name", "Name is too short"));
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+    }
+
+    [Fact]
     public void CreateFromArrayOfErrors_UsingFactory_ShouldBeError()
     {
         // Arrange
