@@ -1,6 +1,7 @@
 namespace Tests;
 
 using ErrorOr;
+
 using FluentAssertions;
 
 public class ErrorOrInstantiationTests
@@ -145,6 +146,22 @@ public class ErrorOrInstantiationTests
         // Assert
         act.Should().Throw<InvalidOperationException>()
            .And.Message.Should().Be("The Value property cannot be accessed when errors have been recorded. Check IsError before accessing Value.");
+    }
+
+    [Fact]
+    public void CreateFromArrayOfErrors_UsingFactory_ShouldBeError()
+    {
+        // Arrange
+        Error[] errors = [
+            Error.Validation("User.Name", "Name is too short"),
+            Error.Forbidden("User.Forbidden", "You are not allowed to create user")
+        ];
+
+        // Act
+        ErrorOr<Person> errorOrPerson = ErrorOrFactory.From<Person>(errors);
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
     }
 
     [Fact]

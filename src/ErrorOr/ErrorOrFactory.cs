@@ -26,4 +26,15 @@ public static class ErrorOrFactory
     {
         return errors;
     }
+
+    /// <summary>
+    /// Creates an <see cref="ErrorOr{TValue}"/> from an enumeration of errors.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <param name="errors">Enumeration of errors.</param>
+    /// <returns>An instance of <see cref="ErrorOr{TValue}"/> containing provided enumeration of errors.</returns>
+    public static ErrorOr<TValue> From<TValue>(IEnumerable<Error> errors)
+    {
+        return errors.ToList();
+    }
 }
