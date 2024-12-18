@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace ErrorOr;
 
@@ -6,6 +7,7 @@ namespace ErrorOr;
 /// A discriminated union of errors or a value.
 /// </summary>
 /// <typeparam name="TValue">The type of the underlying <see cref="Value"/>.</typeparam>
+[CollectionBuilder(typeof(CollectionExpression), nameof(CollectionExpression.CreateErrorOr))]
 public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
 {
     private readonly TValue? _value = default;
@@ -103,6 +105,9 @@ public readonly partial record struct ErrorOr<TValue> : IErrorOr<TValue>
             return _errors[0];
         }
     }
+
+    /// <inheritdoc/>
+    public IEnumerator<Error> GetEnumerator() => _errors!.GetEnumerator();
 
     /// <summary>
     /// Creates an <see cref="ErrorOr{TValue}"/> from a list of errors.

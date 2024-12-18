@@ -407,4 +407,49 @@ public class ErrorOrInstantiationTests
         act.Should().ThrowExactly<ArgumentNullException>()
            .And.ParamName.Should().Be("value");
     }
+
+    [Fact]
+    public void ErrorOr_FromErrorCollectionExpression_WhenAccessingErrors_ShouldReturnErrorList()
+    {
+        // Arrange
+        var nameTooShort = Error.Validation("User.Name", "Name is too short");
+        var userTooYoung = Error.Validation("User.Age", "User is too young");
+
+        // Act
+        ErrorOr<Person> errorOrPerson = [nameTooShort, userTooYoung];
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+        errorOrPerson.Errors.Should().HaveCount(2).And.BeEquivalentTo([nameTooShort, userTooYoung]);
+    }
+
+    [Fact]
+    public void GenericErrorOrInterface_FromErrorCollectionExpression_WhenAccessingErrors_ShouldReturnErrorList()
+    {
+        // Arrange
+        var nameTooShort = Error.Validation("User.Name", "Name is too short");
+        var userTooYoung = Error.Validation("User.Age", "User is too young");
+
+        // Act
+        IErrorOr<Person> errorOrPerson = [nameTooShort, userTooYoung];
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+        errorOrPerson.Errors.Should().HaveCount(2).And.BeEquivalentTo([nameTooShort, userTooYoung]);
+    }
+
+    [Fact]
+    public void ErrorOrInterface_FromErrorCollectionExpression_WhenAccessingErrors_ShouldReturnErrorList()
+    {
+        // Arrange
+        var nameTooShort = Error.Validation("User.Name", "Name is too short");
+        var userTooYoung = Error.Validation("User.Age", "User is too young");
+
+        // Act
+        IErrorOr errorOrPerson = [nameTooShort, userTooYoung];
+
+        // Assert
+        errorOrPerson.IsError.Should().BeTrue();
+        errorOrPerson.Errors.Should().HaveCount(2).And.BeEquivalentTo([nameTooShort, userTooYoung]);
+    }
 }
