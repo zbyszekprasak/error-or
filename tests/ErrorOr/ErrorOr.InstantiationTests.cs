@@ -85,12 +85,12 @@ public class ErrorOrInstantiationTests
 
         // Act
 #pragma warning disable CA1859 // Use concrete types when possible for improved performance
-        IErrorOr<IEnumerable<string>> errorOrPerson = ErrorOrFactory.From(value);
+        IErrorOr<IEnumerable<string>> errorOrValue = ErrorOrFactory.From(value);
 #pragma warning restore CA1859 // Use concrete types when possible for improved performance
 
         // Assert
-        errorOrPerson.IsError.Should().BeFalse();
-        errorOrPerson.Value.Should().BeSameAs(value);
+        errorOrValue.IsError.Should().BeFalse();
+        errorOrValue.Value.Should().BeSameAs(value);
     }
 
     [Fact]
@@ -101,12 +101,12 @@ public class ErrorOrInstantiationTests
 
         // Act
 #pragma warning disable CA1859 // Use concrete types when possible for improved performance
-        IErrorOr errorOrPerson = ErrorOrFactory.From(value);
+        IErrorOr errorOrValue = ErrorOrFactory.From(value);
 #pragma warning restore CA1859 // Use concrete types when possible for improved performance
 
         // Assert
-        errorOrPerson.IsError.Should().BeFalse();
-        errorOrPerson.Value.Should().BeSameAs(value);
+        errorOrValue.IsError.Should().BeFalse();
+        errorOrValue.Value.Should().BeSameAs(value);
     }
 
     [Fact]
